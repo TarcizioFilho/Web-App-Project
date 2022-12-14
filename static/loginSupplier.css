@@ -1,0 +1,152 @@
+body, nav, ul, li{
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+}
+
+header img {
+    padding-left: 20px;
+}
+
+header h1 {
+    color: rgb(255, 255, 255);
+    font-size: 30px;
+    font-style: oblique;
+    padding-right: 700px;
+}
+
+.menu li > a {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    padding: 5px ;
+    padding-left: 10px;
+}
+
+.menu li > img {
+    padding: 1px;
+}
+
+.header {
+    background-color: rgb(139, 0, 253);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    padding-top: 10px;
+    padding-right: 20px;
+}
+
+.header {
+    background-color: rgb(139, 0, 253);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    padding-top: 10px;
+    padding-right: 20px;
+}
+
+.footer {
+    background-color: rgb(139, 0, 253); 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 560px;
+    padding: 10px 20px;
+}
+
+.links-uteis > li {
+    color: rgb(255, 255, 255);
+}
+
+.links-uteis > li > h2 {
+    font-size: 20px;
+}
+
+.links-uteis > li > a {
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+}
+
+.informacao-legal {
+    color: rgb(255, 255, 255);
+}
+
+.informacao-legal > li > h2 {
+    font-size: 20px;
+}
+
+.informacao-legal > li > a {
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+}
+.contatos {
+    color: rgb(255, 255, 255);
+}
+
+.contatos > li > h2 {
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+}
+
+.contatos > li > h3{
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+}
+
+footer {
+    clear: both;
+}
+
+.footer-cr {
+    background-color: rgb(139, 0, 253);
+    display: flex;
+   justify-content: center;
+}
+
+.form {
+    position: relative;
+    top: 300px;
+    left: 50%;
+   transform: translate(-50%, -50%);
+    box-shadow: 1px 1px 10px rgb(211, 211, 211);
+    padding: 70px;
+    width: fit-content;
+}
+
+.form > li {
+   justify-content: center;
+    padding: 5px;
+}
+
+.form > li > h2 {
+    margin-bottom: 30px;
+}
+
+.form > li > input {
+    margin-bottom: 20px;
+}
+
+.form > li > a {
+    display: flex;
+    justify-content: center;
+    color: black;
+}
+
+.btn-confirm {
+    position: relative;
+    top: 20px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

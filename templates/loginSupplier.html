@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{url_for("static", filename="loginSupplier.css")}}">
+    <!-- estilo da página by bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/sandstone/bootstrap.min.css">
+</head>
+<body>
+    <header class="header">
+        <img src="{{url_for('static', filename='images/logo_python_200.png')}}" alt="logo-python">
+        <h1>Sky Tech</h1>
+        <nav class="nav-bar">
+            <ul class="menu">
+                <li><a href="{{url_for('login')}}">Minha conta</a></li>
+                <li><img src="{{url_for('static', filename='images/logo_user.png')}}" alt="logo-user"></li>
+                <li><a href="#">Minhas compras</a></li>
+                <li><img src="{{url_for('static', filename='images/Carrinho_de_Compras_logo.png')}}" alt="logo-carrinho-de-compras"></li>
+            </ul>
+        </nav>
+    </header>
+    <form action="/loginSupplier", method="POST">
+        <ul class="form">
+            <li><h2>Faça seu login</h2></li>
+            <li><input type="email" name="email" placeholder="Inserir email"></li>
+            <li><input type="password" name="password" placeholder="**********"></li>
+            <li><a href="#">Esqueci minha senha</a></li>
+            <li><input type="submit" class=btn-confirm value="Entrar"></li>
+            <li><a href="{{url_for('home')}}">Voltar a página principal</a></li>
+        </ul>
+    
+    </form>
+    <footer>
+        <nav class="footer">
+            <ul class="links-uteis">
+                <li><h2>Links Úteis</h2></li>
+                <li><a href="#"> A nossa história</a></li>
+                <li><a href="#"> Fale conosco</a></li>
+                <li><a href="#"> Rastrear pedido</a></li>
+                <li><a href="#"> Perguntas frequentes</a></li>
+                <li><a href="{{url_for('register_supplier')}}">Área do fornecedor</a></li>     
+            </ul>
+            <ul class="informacao-legal">
+                <li><h2>Informação Legal</h2></li>
+                <li><a href="#"> Informação legal</a></li>  
+                <li><a href="#"> Política de privacidade</a></li>
+                <li><a href="#"> Termos de utilização</a></li>
+                <li><a href="#"> Cookies</a></li>
+            </ul>
+            <ul class="contatos">
+                <li><h2>Contatos</h2></li>
+                <li><h3>Email:<br/> geral.exemplo@email.com</h3></li>
+                <li><h3>Telefone:<br/> 55 xxx xxx xxx</h3></li>    
+            </ul>
+    </footer>
+    <footer class="footer-cr">
+        <p>© Copyright, Empresa ABC S.A </p>  
+    </footer>
+</body>
+</html>

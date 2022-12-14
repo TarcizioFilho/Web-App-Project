@@ -1,0 +1,125 @@
+body, nav, ul, li{
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+}
+
+.view_products  {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    padding: 10px;
+    margin-left: 10px;
+}
+
+.view_products label {
+    font-size: 16px;
+    margin-top: 10px;
+   
+}
+
+.view_products ul li a {
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.view_products ul img {
+    margin-right: 100px;
+}
+
+/* modal-edit style */
+
+section.modal-edit{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: #00000070;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    pointer-events: auto;
+}
+
+section.modal-edit div#card{
+    width: 15rem;
+    position: relative;
+    background-color: #fff;
+    border-radius: .5rem;
+}
+
+section.modal-edit div#card h2{
+    padding: 1rem 0rem 0rem 0rem;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    font-size: 2rem;
+}
+
+section.modal-edit div#card hr{
+    width: 90%;
+    margin: 0 auto;
+}
+
+section.modal-edit div#card p{
+    padding: 0.5rem 0rem 0rem 0rem;
+    text-align: center;
+    margin: 0;
+}
+
+section.modal-edit div#card form.form {
+    padding: 0rem 1rem 1rem 1rem;
+}
+
+section.modal-edit div#card form.form input.form-control{
+    display: flex;
+    text-align: center;
+}
+
+section.modal-edit div#card  p{
+    padding: 1rem 0rem 0rem 0rem;
+}
+
+section.modal-edit div#card div#btns{
+    display: flex;
+    justify-content: center;
+    padding: 0rem 1rem 1rem 1rem;
+    text-decoration: none;
+}
+
+section.modal-edit div#card div#btns a.btn-cancel{
+    margin-right: 1rem;
+    text-decoration: none;
+}
+
+section.modal-edit div#card div#btns a.btn-cancel:hover{
+   color: #7487c1;
+}
+
+section.modal-edit div#card div#btns input.btn-confirm {
+    text-decoration: none;
+    background-color: #ffffff;
+    border: #fff;
+    font-weight: bolder;
+}
+
+section.modal-edit div#card div#btns input.btn-confirm:hover{
+    color: #7487c1;
+}
+
+section.modal-edit div#card div#btns input.btn-cancel {
+    text-decoration: none;
+    background-color: #ffffff;
+    border: #fff;
+    font-weight: bolder;
+}
+
+section.modal-edit div#card div#btns input.btn-cancel:hover{
+    color: #7487c1;
+}
+/* end modal-edit style */
+
+
+

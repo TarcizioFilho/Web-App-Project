@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{url_for("static", filename="viewProducts.css")}}">
+    <!-- estilo da página by bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/sandstone/bootstrap.min.css">
+</head>
+<body>
+    <form action="/viewProducts" class="view_products" method="POST">
+        <ul>
+            <li><label>Atualizar valor mínimo de estoque.</label></li>
+            <li><label>Selecionar o período dos registos de entrada.</label></li>
+            <li><label for="start">Data de início</label></li>
+            <li><input type="date" id="start" name="trip-start"
+                    min="2022-01-01" max="2022-12-31"></li>
+            <li><label for="start">Data final</label></li>
+            <li><input type="date" id="end" name="trip-end"
+                    min="2022-01-01" max="2022-12-31"></li></br>
+            <li><input type="submit" value="Confirmar"></li></br>
+            <li><a href="/viewProducts">Mostrar estoque atual</a></li>
+        </ul>
+        <ul>
+            <img src='/static/inventory_plot.png'/ class="img-plot">
+        </ul>
+    </form>
+    {% for content in inventory_manager_entries %}
+    <section id="edit_minimum_stock">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="text-center">Produto Id</th>
+                    <th class="text-center">Produto</th>
+                    <th class="text-center">Data de entrada</th>
+                    <th class="text-center">Quantidade</th>
+                    <th class="text-center">Estoque mínimo</th>
+                    <th class="text-center">Editar Stq.Mínimo</th>
+                </tr>
+            </thead>
+            <tbody
+                <tr>                   
+                    <td class="text-center">{{content.product_id}}</td>
+                    <td class="text-center">{{content.entry_product_name}}</td>
+                    <td class="text-center">{{content.entry_date}}</td>
+                    <td class="text-center">{{content.entry_product_quantity}}</td>
+                    <td class="text-center">{{content.minimum_stock}}</td>
+                    <td class="text-center"><a href="/inventory-line-edit-id/{{content.id}}" style="text-decoration:none "> 
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
+        fill="orange" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502
+        .646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.1
+        96l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5
+        1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5
+        0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                        </svg>
+                    </a>
+                </td>
+                </tr>
+            {%endfor%}
+            </tbody>
+        </table>
+    </section>
+   
+    <form action="/viewProducts">
+        <br>
+            <h2 class="text-center">Estoque atual</h2>
+        <br>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="text-center">Produtos</th>
+                    <th class="text-center">Estoque(und)</th>
+                    <th class="text-center">Estoque mínimo</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for content in inventory_products %}
+                <tr>
+                    <td class="text-center">{{content[0]}}</td>
+                    <td class="text-center">{{content[2]}}</td>
+                    {% if content[2] <= content[1] %}
+                        <td class="text-center"><p class="alert alert-warning" role="alert">Estoque igual ou menor que a margem mínima. {{content[2]}} unidade(s) </p></td>
+                    {% else %}
+                        <td class="text-center">{{'%0.0f'| format(content[1])}}</td>
+                    {%endif%}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </form>
+
+
+         <!--modal de confirmação para editar uma tarefa-->
+    {% if line_by_id_edit != undefined %}
+
+    <section class="modal-edit">
+        <div id="card">
+
+            <a href="/#registerInvoice"><i class="fa fa-times" aria-hidden="true"></i></a>
+            <h2>Editar linha</h2>
+            <hr>
+
+            <form class="form" action="/inventory-update-line/{{line_by_id_edit.id}}" method="post">
+                <p>Estoque mínimo atual: {{line_by_id_edit.minimum_stock}}</p>
+                <input type="number" step="1" min="0" name="new_minimum_stock"  value="{{ line_by_id_edit.new_minimum_stock}}" placeholder="Inserir novo valor" class="form-control" autofocus>
+               
+
+            <p>Confirmar alterções?</p> 
+
+            <div id="btns">
+                <a href="/view_products">
+                    <input type="submit" class="btn-cancel" value="Cancelar"></a>
+                <a href="/inventory-update-line/{{line_by_id_edit.id}}">
+                    <input type="submit" class="btn-confirm" value="Confirmar">
+                    </a>
+                </div>
+            </form>
+        </div>
+    </section>
+    {% endif %}
+    <!--fim fo modal de confirmação para editar uma tarefa-->
+    
+</body>
+</html>

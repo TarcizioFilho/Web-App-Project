@@ -1,0 +1,56 @@
+body, nav, ul, li{
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+}
+
+.form {
+    position: relative;
+    top: 300px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 1px 1px 10px rgb(211, 211, 211);
+    padding: 70px;
+    width: fit-content;
+}
+
+
+.form > li > h2 {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.form li select {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    width: 180px;
+    height: 25px;
+}
+
+.form label {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.form > li > input {
+    margin-bottom: 15px;
+}
+
+.form > li > a {
+    display: flex;
+    justify-content: center;
+    color: black;
+}
+
+.form > li > :nth-child(2) {
+    padding: 10px;
+}
+
+.btn-confirm {
+    position: relative;
+    top: 30px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

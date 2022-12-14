@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{url_for("static", filename="inventoryMovements.css")}}">
+    <!-- estilo da página by bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/sandstone/bootstrap.min.css">
+</head>
+<body>
+    <form action="/inventory-movements" class="inventory_movements" method="POST">
+        <ul>
+            <li><label>Selecionar o período de movimento de estoque.</label></li>
+            <li><label>Selecionar tipo de movimento</label></li>
+            <li><input type="radio" name="movement_type" value='entry' checked> Entradas</li> 
+            <li><input type="radio" name="movement_type" value='sales'> Saídas</li>
+            <li><label for="start">Data de início</label></li>
+            <li><input type="date" id="start" name="trip-start"
+                    min="2022-01-01" max="2022-12-31"></li>
+            <li><label for="start">Data final</label></li>
+            <li><input type="date" id="end" name="trip-end"
+                    min="2022-01-01" max="2022-12-31"></li></br>
+            <li><input type="submit" class=btn-confirm value="Confirmar"></li>
+        </ul>
+    </form>
+    {% if movement_type == 'entry' %}
+    <section id="edit_entry_movement">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="text-center">Id</th>
+                    <th class="text-center">Produto</th>
+                    <th class="text-center">Data de entrada</th>
+                    <th class="text-center">Fatura</th>
+                    <th class="text-center">Fornecedor</th>
+                    <th class="text-center">Quantidade</th>
+                    <th class="text-center">Estoque mínimo</th>
+                    <th class="text-center">Armazém</th>
+                </tr>
+            </thead>
+            <tbody
+            {% for content in inventory_detail_entry %}
+                <tr>                   
+                    <td class="text-center">{{content.product_id}}</td>
+                    <td class="text-center">{{content.invoice_product}}</td>
+                    <td class="text-center">{{content.invoice_date_register}}</td>
+                    <td class="text-center">{{content.invoice_number}}</td>
+                    <td class="text-center">{{content.invoice_supplier_name}}</td>
+                    <td class="text-center">{{content.invoice_quantity}}</td>
+                    <td class="text-center">{{content.minimum_stock}}</td>
+                    <td class="text-center">{{content.product_warehouse}}</td>
+                </tr>
+            {%endfor%}
+            </tbody>
+        </table>
+    </section>
+    
+    {% elif movement_type == 'sales'%}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th class="text-center">Cliente Id</th>
+                <th class="text-center">Data de saída</th>
+                <th class="text-center">Produto</th>
+                <th class="text-center">Quantidade</th>
+            </tr>
+        </thead>
+        <tbody
+        {% for content in inventory_detail_sales %}
+            <tr>                   
+                <td class="text-center">{{content.product_id}}</td>
+                <td class="text-center">{{content.sales_date}}</td>
+                <td class="text-center">{{content.product_name}}</td>
+                <td class="text-center">{{content.product_quantity}}</td>
+            </tr>
+        {%endfor%}
+        </tbody>
+    </table>
+    {% endif %}
+
+</body>
+</html>

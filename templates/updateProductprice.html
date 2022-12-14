@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{url_for("static", filename="updateProductprice.css")}}">
+    <!-- estilo da página by bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/sandstone/bootstrap.min.css">
+</head>
+<body>
+    <form action="/update_product_price" class="update_product_price" method="POST">
+        <ul>
+            <li><label>Selecionar produto:</label></li>
+            <li><select name="productName" id="productName">
+                <option value="">Selecionar Produto</option>
+                {% for content in product_name %}
+                <option value="{{content.product_name}}"> {{content.product_name}}</option>;
+                {% endfor %}
+                </select></li></br>
+            <li><input type="submit" class=btn-confirm value="Confirmar"></li>
+        </ul>
+    </form>
+    <section id="update_price">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="text-center">Id</th>
+                    <th class="text-center">Data de Registo</th>
+                    <th class="text-center">Produto</th>
+                    <th class="text-center">Preço</th>
+                    <th class="text-center">iva(%)</th>
+                    <th class="text-center">Valor c/iva</th>
+                    <th class="text-center">Editar Registo</th>
+                </tr>
+            </thead>
+            <tbody
+            {% for content in all_content %}
+                <tr>                   
+                    <td class="text-center">{{content.product_id}}</td>
+                    <td class="text-center">{{content.register_date}}</td>
+                    <td class="text-center">{{content.product_name}}</td>
+                    <td class="text-center">{{'%0.2f'| format(content.price_s_iva)}}</td>
+                    <td class="text-center">{{content.iva_tax}}</td>
+                    <td class="text-center">{{'%0.2f'| format(content.price_c_iva)}}</td>
+                    <td class="text-center"><a href="/update-price-id/{{content.id}}" style="text-decoration:none "> 
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
+        fill="orange    " class="bi bi-pencil-square" viewBox="0 0 16 16">
+                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502
+        .646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.1
+        96l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5
+        1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5
+        0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                        </svg>
+                    </a>
+                </td>
+                </tr>
+            {%endfor%}
+            </tbody>
+        </table>
+    </section>
+
+    <!--modal de confirmação para editar uma tarefa-->
+    {% if line_by_id_update != undefined %}
+
+    <section class="modal-edit">
+        <div id="card">
+
+            <a href="/#update_price"><i class="fa fa-times" aria-hidden="true"></i></a>
+            <h2>Editar linha</h2>
+            <hr>
+
+            <form class="form" action="/update-price-line/{{line_by_id_update.id}}" method="post">
+                <p>Preço s/iva atual: {{'%0.2f'| format(line_by_id_update.price_s_iva)}}</p>
+                <input type="number" name="new_price" step="0.01" min="0" value="{{line_by_id_update.new_price}}" placeholder="Inserir novo preço" class="form-control" autofocus>
+                <p>Iva atual: {{line_by_id_update.iva_tax}}%</p>
+                <input type="number" name="new_iva_tax" step="1" min="0" value="{{line_by_id_update.new_iva_tax}}" placeholder="Inserir novo valor" class="form-control" autofocus>
+                <p>Última atualização: {{line_by_id_update.register_date}}</p>
+                <input type="date" name="register_date"  value="{{line_by_id_update.new_register_date}}" placeholder="Inserir data de atualização" class="form-control" autofocus>
+                
+
+            <p>Confirmar alterções?</p> 
+
+            <div id="btns">
+                <a href="/update_product_price">
+                    <input type="submit" class="btn-cancel" value="Cancelar"></a>
+                <a href="/inventory-update-line/{{line_by_id_update.id}}">
+                    <input type="submit" class="btn-confirm" value="Confirmar">
+                </a>
+            </div>
+            </form>
+        </div>
+    </section>
+    {% endif %}
+    <!--fim fo modal de confirmação para editar uma tarefa-->
+
+</body>
+</html>

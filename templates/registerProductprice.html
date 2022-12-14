@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{url_for("static", filename="registerProductprice.css")}}">
+    <!-- estilo da página by bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/sandstone/bootstrap.min.css">
+</head>
+<body>
+    <header class="header">
+
+    </header>
+    <form action="/register_product_price", method="POST">
+        <ul class="form">
+            <li><h2>Cadastrar preço do produto</h2></li>
+            <li> <select name="productName" id="productName">
+            <option value="">Selecionar Produto</option>
+            {% for content in all_content %}
+                <option value="{{content.product_name}}"> {{content.product_name}}</option>;
+            {% endfor %}
+            </select></li>
+            <label>Preço s/iva</label>
+            <li><input type="number" step="0.01" name="price"></li>
+            <label>iva(%)</label>
+            <li><input type="number" name="ivaTax"></li>
+            <label>Data de Atualização</label>
+            <li><input type="date" name="registerDate"></li>
+            <li><input type="submit" class="btn-confirm" value="Cadastrar"></li>
+        </ul>
+    </form>
+</body>
+</html>

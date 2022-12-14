@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{url_for("static", filename="carrinho.css")}}">
+    <!-- estilo da página by bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/sandstone/bootstrap.min.css">
+</head>
+
+<body>
+    <header class="header">
+        <img src="{{url_for('static', filename='images/logo_python_200.png')}}" alt="logo-python">
+        <h1>X Tech</h1>
+        {% if current_user.is_authenticated %}
+        <nav class="nav-bar">
+            <ul class="menu">
+                <li>
+                    <div>  
+                        <h2> Olá {{current_user.user_name}}</h2>
+                        <a href="{{ url_for('logout') }}">Sair da Conta</a>
+                    </div>
+                </li>
+                <li><a href="{{ url_for('my_account') }}"><img src="{{url_for('static', filename='images/logo_user.png')}}" alt="logo-user"></a></li>
+            </ul>
+        </nav>
+        {% endif %} 
+    </header>
+    <div>
+        <ul class="nav-actions">
+            <li><a href="{{url_for('home')}}">Produtos</a></li> <!--exemplos de Links para possíveis páginas do site-->
+            <li>|</li>
+            <li><a href="{{url_for('home')}}">Promoções</a></li> <!--exemplos de Links para possíveis páginas do site-->
+            <li>|</li>
+            <li><a href="{{url_for('home')}}">Novidades</a></li> <!--exemplos de Links para possíveis páginas do site-->
+        </ul>
+    </div>
+    <section id="carrinho">
+    <form action="/carrinho", method='POST'>
+        <table class="table table-striped">    
+            <tbody>
+                {% for content in get_produt_by_id %}
+                {%if content.product_sold == None %}
+                <tr class="product-information">
+                    <td class="text-center">{{content.product_name}}</td>
+                    <td><label>Preço: {{'%0.2f'| format(content.price_c_iva)}}€</label></td>
+                    <td><label>Quantidade: {{content.product_quantity}}</label></td>
+                    <td class="text-center">Total: {{'%0.2f'| format(content.total_amount)}}€</td>
+                    <td><a href="/sales-confirm-id/{{content.id}}"> Comprar</a></td>
+                    <td class="text-left">
+                        <!--Botão excluir -> aciona o modal de confirmaçã para excluir a tarefa. SVG codes do bootstrap, icone da lixeira -->
+                        <a href="/remove-line-product/{{content.id}}" style="text-decoration:none"> 
+                           <svg class="bi bi-trash" width="25" height="25" viewBox="0 0 16 
+           16" fill="red" xmlns="http://www.w3.org/2000/svg">
+                           <path d="M5.5 5.5A.5.5 0 016 6v6a.5.5 0 01-1 0V6a.5.5 0
+           01.5-.5zm2.5 0a.5.5 0 01.5.5v6a.5.5 0 01-1 0V6a.5.5 0 01.5-.5zm3 .5a.5.5 0 00-1
+           0v6a.5.5 0 001 0V6z"/>
+                           <path fill-rule="evenodd" d="M14.5 3a1 1 0 01-1 1H13v9a2 2 0
+           01-2 2H5a2 2 0 01-2-2V4h-.5a1 1 0 01-1-1V2a1 1 0 011-1H6a1 1 0 011-1h2a1 1 0 011
+           1h3.5a1 1 0 011 1v1zM4.118 4L4 4.059V13a1 1 0 001 1h6a1 1 0 001-1V4.059L11.882
+           4H4.118zM2.5 3V2h11v1h-11z" clip-rule="evenodd"/>
+                           </svg>
+                       </a>
+                   </td>
+                    <td><a href="{{url_for('home')}}">Continuar Comprando</a></td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>   
+    </form>
+    </section> 
+
+    <!--modal de confirmação para confirmar uma compra-->
+    {% if line_by_id_sales != undefined %}
+
+    <section class="modal-edit">
+        <div id="card">
+
+            <a href="/#carrinho"><i class="fa fa-times" aria-hidden="true"></i></a>
+            <h2>Confirmar compra</h2>
+
+
+            <div id="btns">
+                <a href="/carrinho">
+                    <input type="submit" class="btn-cancel" value="Cancelar"></a>
+                <a href="/sales-confirm/{{line_by_id_sales.id}}">
+                    <input type="submit" class="btn-confirm" value="Confirmar">
+                    </a>
+                </div>
+            </form>
+        </div>
+    </section>
+    {% endif %}
+    <!--fim do modal de confirmação para confimar uma compra-->
+
+    <footer>
+        <nav class="footer">
+            <ul class="links-uteis">
+                <li><h2>Links Úteis</h2></li>
+                <li><a href="#"> A nossa história</a></li>
+                <li><a href="#"> Fale conosco</a></li>
+                <li><a href="#"> Rastrear pedido</a></li>
+                <li><a href="#"> Perguntas frequentes</a></li>
+                <li><a href="{{url_for('register_supplier')}}">Área do fornecedor</a></li>  
+            </ul>
+            <ul class="informacao-legal">
+                <li><h2>Informação Legal</h2></li>
+                <li><a href="#"> Informação legal</a></li>  
+                <li><a href="#"> Política de privacidade</a></li>
+                <li><a href="#"> Termos de utilização</a></li>
+                <li><a href="#"> Cookies</a></li>
+            </ul>
+            <ul class="contatos">
+                <li><h2>Contatos</h2></li>
+                <li><h3>Email:<br/> geral.exemplo@email.com</h3></li>
+                <li><h3>Telefone:<br/> 55 xxx xxx xxx</h3></li>    
+            </ul>
+    </footer>
+    <footer class="footer-cr">
+        <p>© Copyright, Empresa ABC S.A </p>  
+    </footer>
+</body>
+
+</html>

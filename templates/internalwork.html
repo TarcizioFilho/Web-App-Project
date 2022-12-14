@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for("static", filename="main_internal_work.css")}}">
+    <!-- estilo da página by bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/sandstone/bootstrap.min.css">
+    <!-- O Script abaixo serve para ajustar o Iframe de acordo com o tamnho da página -->
+    <script>
+        function resizeIframe(obj) {
+          obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + 'px';
+        }
+      </script>
+    <title>Document</title>
+</head>
+<body>
+    <header class="header">
+        <img src="{{url_for('static', filename='images/logo_python_200.png')}}" alt="logo-python">
+        <h1>X Tech</h1>
+        <nav class="nav-bar">
+            <ul class="menu">
+                <li>
+                {% if current_user.is_authenticated %}
+                    <div>  
+                    <label> Olá {{current_user.user_name}}</label>
+                    <p></p>
+                    <a href="{{ url_for('logout') }}">Sair da Conta</a>
+                    </div>
+                    {% endif %}
+                </li>
+                <li><img src="{{url_for('static', filename='images/logo_user.png')}}" alt="logo-user"></li>
+            </ul>
+        </nav>
+    </header>
+    <nav>
+        <ul class="nav-actions">
+            <li><a href="{{url_for('register_product')}}" target="frame1">Cadastrar produtos</a></li>
+            <li><a href="{{url_for('register_invoice')}}" target="frame1">Entrada de estoque</a></li>
+            <li><a href="{{url_for('register_product_price')}}" target="frame1">Cadastrar preço de venda</a></li>
+            <li><a href="{{url_for('update_product_price')}}" target="frame1">Atulizar preços de venda</a></li>
+            <li><a href="{{url_for('inventory_movements')}}" target="frame1">Movimento de estoque</a></li>
+            <li><a href="{{url_for('view_products')}}" target="frame1">Visualizar estoque</a></li>
+            <li><a href="{{url_for('sales_report_company')}}" target="frame1">Relatório de vendas</a></li>
+        </ul>
+    </nav>
+    <nav class="iframe">
+        <iframe src="" name="frame1" width="100%" height="2000" frameborder="0" scrolling="no" onload="resizeIframe(this)"></iframe>
+    </nav>
+    <footer class="footer-cr">
+        <p>© Copyright, Empresa ABC S.A </p>  
+    </footer>
+</body>
+</html>

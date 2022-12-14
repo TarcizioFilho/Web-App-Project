@@ -1,0 +1,179 @@
+body, nav, ul, li{
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+}
+
+header img {
+    padding-left: 20px;
+}
+
+
+header h1 {
+    color: rgb(255, 255, 255);
+    font-size: 30px;
+    font-style: oblique;
+    padding-right: 950px;
+    
+}
+
+.menu li > a {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    padding: 5px ;
+    padding-left: 10px;
+}
+
+.menu li > a > img {
+    padding: 1px;
+}
+
+.user-menu {
+    color: rgb(255, 255, 255);
+    font-size: 12px;
+}
+
+.user-menu li h2 {
+    font-size: 12px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+
+
+.header {
+    background-color: rgb(0, 33, 153);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    padding-top: 10px;
+    padding-right: 20px;
+}
+
+.nav-actions {
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 1px 1px 10px rgb(211, 211, 211);
+    background-color: rgb(255, 255, 255);
+    padding: 5px;
+    padding-left: 300px;
+    padding-right: 300px;
+    font-size: 20px;
+}
+
+.nav-actions li a {
+    text-decoration: none;
+    color: black;
+}
+
+.products {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    max-width: 1000px;
+    margin: 0 auto;
+
+}
+
+.product {
+    box-shadow: 1px 1px 10px rgb(211, 211, 211);
+    background-color: rgb(255, 255, 255);
+    margin: 30px;
+}
+
+.product ul {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: bold;
+    padding: 5px 10px;
+    padding-right: 20px;
+}
+
+.product-name {
+    font-size: 16px;
+}
+
+.product-price{
+    font-size: 18px;
+    color: rgb(255, 111, 0);
+}
+  
+
+.input-quantity{
+    width: 40px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.footer {
+    background-color: rgb(0, 33, 153);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 560px;
+    padding: 0px 20px;
+}
+
+.links-uteis > li {
+    color: rgb(255, 255, 255);
+    
+}
+
+.links-uteis > li > h2 {
+    font-size: 20px;
+    padding-top: 20px;
+}
+
+.links-uteis > li > a {
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+}
+
+.informacao-legal {
+    color: rgb(255, 255, 255);
+}
+
+.informacao-legal > li > h2 {
+    font-size: 20px;
+}
+
+.informacao-legal > li > a {
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+}
+.contatos {
+    color: rgb(255, 255, 255);
+}
+
+.contatos > li > h2 {
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+}
+
+.contatos > li > h3{
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+}
+
+footer {
+    clear: both;
+}
+
+.footer-cr {
+    background-color: rgb(0, 33, 153);
+    display: flex;
+    justify-content: center;
+}
+
+.footer-cr > p{
+    color: rgb(255, 255, 255);
+}

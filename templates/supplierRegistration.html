@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for("static", filename="main_internal_work.css")}}">
+    <!-- estilo da página by bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/sandstone/bootstrap.min.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <header class="header">
+        <img src="{{url_for('static', filename='images/logo_python_200.png')}}" alt="logo-python">
+        <h1>Sky Tech</h1>
+        <nav class="nav-bar">
+            <ul class="menu">
+                <li>
+                {% if current_user.is_authenticated %}
+                    <div>  
+                    <label> Olá {{current_user.user_name}}</label>
+                    <p></p>
+                    <a href="{{ url_for('logout') }}">Sair da Conta</a>
+                    </div>
+                    {% endif %}
+                </li>
+                <li><img src="{{url_for('static', filename='images/logo_user.png')}}" alt="logo-user"></li>
+            </ul>
+        </nav>
+    </header>
+    <nav>
+        <ul class="nav-actions">
+            <li><a href="">Cadastrar fonecedor</a></li>
+            <li><a href="">Obter Faturas</a></li>
+            <li><a href="">Cadastrar produtos</a></li>
+            <li><a href="">Visualizar produtos</a></li>
+        </ul>
+    </nav>
+    <nav>
+        <ul>
+            <div class="selecionar fonecedor ">
+                {% if "#cadastrar_fornecedor" %}
+                    <label>Selecionar fornecedor</label>
+                    <li><select name="supplier_filter" id="supplier_filter" class="form-control">
+                        <option value="">Selecionar Fornecedor</option>
+                        {% for content in all_content %}
+                            <option value="{{content.supplier_name}}"> {{content.supplier_name}}</option>;
+                        {% endfor %}
+                        </select></li>
+                    <br/>
+                    <input type="hidden" name="hidden_value" id="hidden_value" />
+                    <div style="clear:both" ></div>  
+                    <br/>  
+                    <div class="responsive-table">
+                        <table class="table table-table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>NIF</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                {% endif %}    
+            </div>    
+        </ul>
+        <script>
+        $(document).ready(function(){
+            load_data();
+            function load_data(query='')
+            {
+                $.ajax({
+                    url: "/process",
+                    method:"POST",
+                    data:{query:query},
+                    success:function(data)
+                    {
+                        $('tbody').html(data);
+                        $('tbody').append(data.htmlresponse);
+                    }
+                })
+            }
+
+            $('#supplier_filter').change(function(){
+                $('#hidden_value').val($('#supplier_filter').val());
+                var query = $('#hidden_value').val();
+                load_data(query)
+            });
+        });
+        </script>
+    <footer class="footer-cr">
+        <p>© Copyright, Empresa ABC S.A </p>  
+    </footer>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{url_for("static", filename="registerInvoice.css")}}">
+    <!-- estilo da página by bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/sandstone/bootstrap.min.css">
+</head>
+<body>
+    <header class="header">
+    </header>
+   <form action="/registerInvoice", method="POST">
+        <ul class="form1">
+            <li><label>Registar Fatura</label></li>
+            <label>Escolher fornecedor:</label>
+            <li><select name="supplierName" id="supplierNaeme">
+                <option value="">Selecionar Fornecedor</option>
+                {% for content in supplier_content %}
+                <option value="{{content.supplier_name}}"> {{content.supplier_name}}</option>;
+                {% endfor %}
+                </select></li>
+        </ul>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Numero da Fatura<input type="text" name="invoiceNumber"></th>
+                    <th>Data de emissão<input type="date" name="invoiceDate"></th>
+                    <th>Data de registo<input type="date" name="invoiceRegister"></th>
+                    <th>Valor total s/iva (€) <input value={{value_amount_s_iva}}></th>
+                    <th>Valor total c/iva (€) <input value={{value_amount_c_iva}}></th>
+                <tr>
+            </thead>    
+        </table>
+        <ul>
+            <li><input type="submit" class=btn-confirm value="Registar"></li>
+        </ul>
+        
+    </form>
+    
+    <section id="registerInvoice">
+    <form action="/addLineinvoice" class="addLineinvoice", method="POST">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="text-center">Produto <select name="productName" id="productName">
+                        <option value="">Selecionar Produto</option>
+                        {% for content in all_content %}
+                        <option value="{{content.product_name}}"> {{content.product_name}}</option>;
+                        {% endfor %}
+                        </select></th>
+                    <th class="text-center">Quantidade <input type="number" name="quantity"></th>
+                    <th class="text-center">Valor <input type="number" step="0.01" name="price"></th>
+                    <th class="text-center">Iva(%) <input type="number" name="ivaTax"></th>
+                    <th class="text-center">Total</th>
+                    <th class="text-center">Estoque mínimo <input type="number" step="1" name="minimumStock" min="1"></li>
+                    <th class="text-center">Armazém <select name="wareHouse" id="warehouse">
+                        <option value="">Selecionar</option>
+                        {% for content in warehouse_list %}
+                        <option value="{{content}}"> {{content}}</option>;
+                        {% endfor %}
+                        </select></th>
+                    <th><input type="submit" class=btn-confirm value="Adicionar"></th>
+                </tr>
+            </thead>
+            <tbody
+                {% for content in line_invoice_content %}
+                {% if content.invoice_number == None %}
+                    <tr>                   
+                        <td class="text-center">{{content.invoice_product}}</td>
+                        <td class="text-center">{{content.invoice_quantity}}</td>
+                        <td class="text-center">{{'%0.2f'| format(content.invoice_value_s_IVA)}}</td>
+                        <td class="text-center">{{content.invoice_TAX_IVA}}</td>
+                        <td class="text-center">{{'%0.2f'| format((content.invoice_value_s_IVA * content.invoice_quantity) * ((content.invoice_TAX_IVA/100)+1))}}</td>
+                        <td class="text-center">{{'%0.2f'| format(content.minimum_stock)}}</td>
+                        <td class="text-center">{{content.product_warehouse}}</td>
+                            <!--Botão editar -> aciona o modal de confirmação de edição da tarefa. SVG code do bootstrap, icone do edit-->
+                            <td><a href="/line-edit-id/{{content.id}}" style="text-decoration:none "> 
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
+                fill="yellow" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502
+                .646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.1
+                96l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5
+                1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5
+                0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                                </svg>
+                            </a>
+                        </td>
+                    <td class="text-left">
+                             <!--Botão excluir -> aciona o modal de confirmaçã para excluir a tarefa. SVG codes do bootstrap, icone da lixeira -->
+                             <a href="/line-remove-id/{{content.id}}" style="text-decoration:none"> 
+                                <svg class="bi bi-trash" width="25" height="25" viewBox="0 0 16 
+                16" fill="red" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5.5 5.5A.5.5 0 016 6v6a.5.5 0 01-1 0V6a.5.5 0
+                01.5-.5zm2.5 0a.5.5 0 01.5.5v6a.5.5 0 01-1 0V6a.5.5 0 01.5-.5zm3 .5a.5.5 0 00-1
+                0v6a.5.5 0 001 0V6z"/>
+                                <path fill-rule="evenodd" d="M14.5 3a1 1 0 01-1 1H13v9a2 2 0
+                01-2 2H5a2 2 0 01-2-2V4h-.5a1 1 0 01-1-1V2a1 1 0 011-1H6a1 1 0 011-1h2a1 1 0 011
+                1h3.5a1 1 0 011 1v1zM4.118 4L4 4.059V13a1 1 0 001 1h6a1 1 0 001-1V4.059L11.882
+                4H4.118zM2.5 3V2h11v1h-11z" clip-rule="evenodd"/>
+                                </svg>
+                            </a>
+                        </td>
+                    </tr>
+                {%endif%}
+                {%endfor%}
+            </tbody>
+        </table>  
+    </form>
+    </section>  
+    
+    <!--modal de confirmação para editar uma tarefa-->
+    {% if line_by_id_edit != undefined %}
+
+    <section class="modal-edit">
+        <div id="card">
+
+            <a href="/#registerInvoice"><i class="fa fa-times" aria-hidden="true"></i></a>
+            <h2>Editar linha</h2>
+            <hr>
+
+            <form class="form" action="/updateLine/{{line_by_id_edit.id}}" method="post">
+                <p>Quantidade atual: {{line_by_id_edit.invoice_quantity}}</p>
+                <input type="number" step="1" min="0" name="new_invoice_quantity"  value="{{ line_by_id_edit.new_invoice_quantity}}" placeholder="Inserir nova quantidade" class="form-control" autofocus>
+                <p>Preço atual: € {{'%0.2f'| format(line_by_id_edit.invoice_value_s_IVA)}}</p>
+                <input type="number" step="0.01" min="0" name="new_invoice_value_s_IVA"  value="{{ line_by_id_edit.new_invoice_value_s_IVA}}" placeholder="Inserir novo valor" class="form-control" autofocus>
+                <p>Iva(%) atual: {{line_by_id_edit.invoice_TAX_IVA}}</p>
+                <input type="number" step="1" min="0" name="new_invoice_TAX_IVA"  value="{{ line_by_id_edit.new_invoice_TAX_IVA}}" placeholder="Inserir novo iva" class="form-control" autofocus>
+                <p>Estoque mínimo atual: {{line_by_id_edit.minimum_stock}}</p>
+                <input type="number" step="1" min="0" name="new_minimum_stock"  value="{{ line_by_id_edit.new_minimum_stock}}" placeholder="Inserir novo valor" class="form-control" autofocus>
+
+            <p>Confirmar alterções?</p> 
+
+            <div id="btns">
+                <a href="/registerInvoice">
+                    <input type="submit" class="btn-cancel" value="Cancelar"></a>
+                <a href="/updateLine/{{line_by_id_edit.id}}">
+                    <input type="submit" class="btn-confirm" value="Confirmar">
+                    </a>
+                </div>
+            </form>
+        </div>
+    </section>
+    {% endif %}
+    <!--fim fo modal de confirmação para editar uma tarefa-->
+
+    <!--modal de confirmação para excluir uma tarefa-->
+    {% if line_by_id_remove != undefined %}
+
+    <section class="modal">
+        <div id="card">
+
+            <a href="/#registerInvoice"><i class="fa fa-times" aria-hidden="true"></i></a>
+            <h2>Confirmação</h2>
+            <hr>
+
+            <p>Excluir produto {{line_by_id_remove.invoice_product}} ?</p>
+            <div id="btns">
+                <a href="/registerInvoice">
+                    <input type="submit" class="btn-cancel" value="Cancelar"></a>
+                <a class="btn-confirm" href="/removeLine/{{line_by_id_remove.id}}">
+                    <input type="submit" class="btn-confirm" value="Confirmar"></a>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+<!--fim do modal de confirmação para excluir uma tarefa-->
+
+    <footer>
+    </footer>
+</body>
+</html>

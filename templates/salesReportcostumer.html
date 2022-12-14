@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{url_for("static", filename="salesReportcostumer.css")}}">
+    <!-- estilo da página by bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/sandstone/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.0.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <form action="/sales_report_costumer" class="sales_report_costumer" method="POST">
+        <ul>
+            <li><label>Selecione o período para visualizar às compras realizadas.</label></li>
+            <li><label for="start">Data de início</label></li>
+            <li><input type="date" id="start" name="trip-start"
+                    min="2022-01-01" max="2022-12-31"></li>
+            <li><label for="start">Data final</label></li>
+            <li><input type="date" id="end" name="trip-end"
+                    min="2022-01-01" max="2022-12-31"></li></br>
+            <li><input type="submit" class=btn-confirm value="Confirmar"></li>
+        </ul>
+        <ul>
+            <img src='/static/sales_costumer_plot.png'/ class="img-plot">
+        </ul>
+    </form>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th class="text-center">Produtos</th>
+                <th class="text-center">Quantidade</th>
+                <th class="text-center">Valor</th>
+                <th class="text-center">Data de compra</th>
+            </tr>
+        </thead>
+        <tbody
+        {% for content in filter_date %}
+        {% if content.costumer_id == current_user.id %}
+            <tr>                   
+                <td class="text-center">{{content.product_name}}</td>
+                <td class="text-center">{{content.product_quantity}}</td>
+                <td class="text-center">€{{'%0.2f'| format(content.total_amount)}}</td>
+                <td class="text-center">{{content.sales_date}}</td>
+            </tr>
+        {% endif %}
+        {%endfor%}
+        </tbody>
+    </table>
+</body>
+</html>

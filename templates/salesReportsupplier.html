@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{url_for("static", filename="salesReportsupplier.css")}}">
+    <!-- estilo da página by bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/sandstone/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.0.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    
+    <form action="/sales_report_supplier" class="sales_report_supplier" method="POST">
+        <ul>
+            <li><label>Selecione o período para visualizar às faturas registadas.</label></li>
+            <li><label for="start">Data de início</label></li>
+            <li><input type="date" id="start" name="trip-start"
+                    min="2022-01-01" max="2022-12-31"></li>
+            <li><label for="start">Data final</label></li>
+            <li><input type="date" id="end" name="trip-end"
+                    min="2022-01-01" max="2022-12-31"></li></br>
+            <li><input type="submit" class=btn-confirm value="Pesquisar"></li>
+        </ul>
+        <ul>
+            <img src='/static/sales_plot.png'/ class="img-plot">
+        </ul>
+    </form>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th class="text-center">Faturas</th>
+                <th class="text-center">Valor</th>
+                <th class="text-center">Data de emisão</th>
+                <th class="text-center">Data de registo</th>
+            </tr>
+        </thead>
+        <tbody
+        {% for content in filter_date %}
+        {% if content.supplier_id == current_user.id %}
+            <tr>                   
+                <td class="text-center">{{content.invoice_number}}</td>
+                <td class="text-center">€ {{content.invoice_value_c_IVA}}</td>
+                <td class="text-center">{{content.invoice_date}}</td>
+                <td class="text-center">{{content.invoice_date_register}}</td>
+            </tr>
+        {% endif %}
+        {%endfor%}
+        </tbody>
+    </table>
+    
+</body>
+
+</html>

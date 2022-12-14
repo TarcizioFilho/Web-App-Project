@@ -1,0 +1,243 @@
+body, nav, ul, li{
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+}
+
+header img {
+    padding-left: 20px;
+}
+
+header h1 {
+    color: rgb(255, 255, 255);
+    font-size: 30px;
+    font-style: oblique;
+    padding-right: 870px;
+    
+}
+
+.header {
+    background-color: rgb(0, 33, 153);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu h2 {
+    color: white;
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    padding-top: 10px;
+    padding-right: 20px;
+}
+
+
+.menu li > div {
+    padding-left: 15px;
+}
+
+
+.menu li > div > label {
+    color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+}
+
+.menu li > div > a {
+    color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    font-size: 11px;
+    text-decoration: none;
+    
+}
+
+.nav-actions {
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 1px 1px 10px rgb(211, 211, 211);
+    background-color: rgb(255, 255, 255);
+    padding: 5px;
+    padding-left: 300px;
+    padding-right: 300px;
+    font-size: 20px;
+}
+
+.nav-actions li a {
+    text-decoration: none;
+    color: black;
+}
+
+.product-information {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.product-information td a {
+    text-decoration: none;
+}
+
+
+/* modal-edit style */
+
+section.modal-edit{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: #00000070;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: auto;
+}
+
+section.modal-edit div#card{
+    width: 15rem;
+    position: relative;
+    background-color: #fff;
+    border-radius: .5rem;
+}
+
+section.modal-edit div#card h2{
+    padding: 1rem 0rem 0rem 0rem;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    font-size: 2rem;
+}
+
+section.modal-edit div#card hr{
+    width: 90%;
+    margin: 0 auto;
+}
+
+section.modal-edit div#card p{
+    padding: 0.5rem 0rem 0rem 0rem;
+    text-align: center;
+    margin: 0;
+}
+
+section.modal-edit div#card form.form {
+    padding: 0rem 1rem 1rem 1rem;
+}
+
+section.modal-edit div#card form.form input.form-control{
+    display: flex;
+    text-align: center;
+}
+
+section.modal-edit div#card  p{
+    padding: 1rem 0rem 0rem 0rem;
+}
+
+section.modal-edit div#card div#btns{
+    display: flex;
+    justify-content: center;
+    padding: 0rem 1rem 1rem 1rem;
+    text-decoration: none;
+}
+
+section.modal-edit div#card div#btns a.btn-cancel{
+    margin-right: 1rem;
+    text-decoration: none;
+}
+
+section.modal-edit div#card div#btns a.btn-cancel:hover{
+   color: #7487c1;
+}
+
+section.modal-edit div#card div#btns input.btn-confirm {
+    text-decoration: none;
+    background-color: #ffffff;
+    border: #fff;
+    font-weight: bolder;
+}
+
+section.modal-edit div#card div#btns input.btn-confirm:hover{
+    color: #7487c1;
+}
+
+section.modal-edit div#card div#btns input.btn-cancel {
+    text-decoration: none;
+    background-color: #ffffff;
+    border: #fff;
+    font-weight: bolder;
+}
+
+section.modal-edit div#card div#btns input.btn-cancel:hover{
+    color: #7487c1;
+}
+/* end modal-edit style */
+
+.footer {
+    background-color: rgb(0, 33, 153);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 560px;
+    padding: 0px 20px;
+}
+
+.links-uteis > li {
+    color: rgb(255, 255, 255);
+    
+}
+
+.links-uteis > li > h2 {
+    font-size: 20px;
+    padding-top: 20px;
+}
+
+.links-uteis > li > a {
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+}
+
+.informacao-legal {
+    color: rgb(255, 255, 255);
+}
+
+.informacao-legal > li > h2 {
+    font-size: 20px;
+}
+
+.informacao-legal > li > a {
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+}
+.contatos {
+    color: rgb(255, 255, 255);
+}
+
+.contatos > li > h2 {
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+}
+
+.contatos > li > h3{
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+}
+
+footer {
+    clear: both;
+}
+
+.footer-cr {
+    background-color: rgb(0, 33, 153);
+    display: flex;
+   justify-content: center;
+}
+
+.footer-cr p {
+    color: white;
+}

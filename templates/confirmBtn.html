@@ -1,0 +1,26 @@
+{% extends 'registerInvoice.html' %}
+{% block title %} Update Content{% endblock %}
+{% block content %}
+
+    <section class="modal-edit">
+        <div id="card">
+
+            <a href="/#registerInvoice"><i class="fa fa-times" aria-hidden="true"></i></a>
+            <h2>Edit task</h2>
+            <hr>
+
+            <p>Current name task: {{line_by_id_edit.content}}</p>
+            <form action="/updateLine/{{line_by_id_edit.id}}" method="post">
+                <div class="form-group">
+                    <input type="text" name="new_content_task" value="{{line_by_id_edit.new_content_task}}" placeholder="type a new name" class="form-control" autofocus>
+                </div>
+            <p>Confirm change?</p>
+
+            <div id="btns">
+                <a class="btn-cancel" href="/#registerInvoice">Cancel</a>
+                <a type="submit" class="btn-confirm" value="Update Name" href="/updateLine/{{line_by_id_edit.id}}">Confirm</a>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

@@ -1,0 +1,21 @@
+Ecommerce website
+
+Features: 
+	 Stock management;
+	 Differnt access to costumer, supplier and Admin;
+	 Each user type has a specific area with some features(purchase historic, sales storic, camparative charts,...)
+	
+Tech Stack:
+	   Python 3; 
+	   Visual Studio Code;
+	   Flask;
+	   Flask-Login;
+	   Jinja2;
+	   Flask SQLAlchemy; 
+	   SQLite;
+	   Matplotlib;
+	   Pandas;
+	   Virtualenv;
+	   Bootstrap.
+
+	

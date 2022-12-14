@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{url_for("static", filename="registerProduct.css")}}">
+    <!-- estilo da página by bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/sandstone/bootstrap.min.css">
+</head>
+<body>
+    <header class="header">
+
+    </header>
+    <form action="/registerProduct", method="POST">
+        <ul class="form">
+            <li><h2>Cadastrar produto</h2></li>
+            <label>Nome</label>
+            <li><input type="text" name="name" placeholder="Inserir nome do produto"></li>
+            <label>Categoria</label>
+            <li><input type="text" name="category" placeholder="Inserir a categoria"></li>
+            <label>Armazem</label>
+            <li><input type="text" name="warehouse" placeholder="Inserir o armazem"></li>
+            <label>Data de entrada</label>
+            <li><input type="date" name="registerDate" placeholder="Inserir data de entrada"></li>
+            <label>Produto importado?</label>
+            <li><input type="radio" name="importedProduct" value='sim'> Sim</li> 
+            <li><input type="radio" name="importedProduct" value='não'> Não</li>
+            <li><input type="submit" class=btn-confirm value="Cadastrar"></li>
+        </ul>
+    </form>
+</body>
+</html>
